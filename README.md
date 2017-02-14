@@ -8,7 +8,7 @@ A simple yet fast light engine for Phaser (WebGL render).
 
 # Demo
 
-Check out the demo [here](https://and3rson.github.io/enlightenment/).
+Check out the demo [here](https://and3rson.github.io/enlightenment/)!
 
 # Usage
 
