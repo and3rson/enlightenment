@@ -1,5 +1,3 @@
-// import { BlurShader } from './shaders';
-
 const lightFragSource = require('./light.frag');
 const blurFragSource = require('./blur.frag');
 
@@ -101,11 +99,8 @@ export class LightSystem {
             lightFragSource
         );
         this.lightFilter.setResolution(this.w, this.h);
-        // this.blurShader = new BlurShader(this.w, this.h);
-        // this.lightImage.filters = [this.filter, this.blurShader.getFilter()];
         this.blurFilter = new Phaser.Filter(game, this.blurFilterUniforms, blurFragSource);
         this.lightImage.filters = [this.lightFilter, this.blurFilter];
-        // this.renderedImage.filters = [this.blurShader.getFilter()];
 
         this.lightSources = [];
         this.objects = [];
@@ -184,7 +179,7 @@ export class LightSystem {
     destroy() {
         // TODO: `destroy` or `remove`?
         this.lightFilter.destroy();
-        this.blurShader.destroy();
+        this.blurFilter.destroy();
         this.image.destroy();
     }
 }

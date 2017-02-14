@@ -11,10 +11,13 @@
   },
   "author": "Andrew Dunai",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
     "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.1",
+    "gulp-watch": "^4.3.11",
     "stringify": "^5.1.0",
     "vinyl-source-stream": "^1.1.0"
   }
