@@ -6,11 +6,11 @@ A simple yet fast light engine for Phaser (WebGL render).
 
 ![Screenshot](http://i.imgur.com/d9XeWld.jpg)
 
-![Video](http://public.dun.ai/public/enlightenment.mp4)
+[Video demo](http://public.dun.ai/public/enlightenment.mp4)
 
 # Demo
 
-Check out the demo [here](https://and3rson.github.io/enlightenment/)!
+Check out the [live demo here](https://and3rson.github.io/enlightenment/)!
 
 # Usage
 
