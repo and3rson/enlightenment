@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <script type="text/javascript" src="./lib/phaser.min.js"></script>
+    <script type="text/javascript" src="./dist/enlightenment.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <style type="text/css">
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+    #enable-debug-ctn {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+        color: #FFF;
+        font-family: sans-serif;
+    }
+    </style>
+</head>
+<body>
+    <div id="enable-debug-ctn">
+        <input type="checkbox" autocomplete="off" id="enable-debug" />
+        <label for="enable-debug">Enable debug</label>
+
+        <input type="checkbox" autocomplete="off" id="toggle-background" />
+        <label for="toggle-background">Toggle background</label>
+    </div>
+    <script type="text/javascript">
+        window.game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.WEBGL, 'sp', {
+            preload: function() {
+                game.load.image('bg', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQCAYAAACAvzbMAAAe8UlEQVR4nGLMDFv3n2EUjIJRMApGwSggEQAAAAD//2IaaAeMglEwCkbBKBiaAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//2IZaAeMgpENpq0MROFnha8nSX4UjIJRMHAAAAAA//8a7YGMglEwCkbBKCALAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//9izI7YMHofyCgYNGDKcn8Ufk7kxgFyySgYBUMPEMo/1M5fAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gp0DGQUDCug9ZjsKRsFIArTOPwAAAAD//xrtgYyCUTAKRsEoIAsAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqdAxkFo2AUjIJhAug9pwgAAAD//xrtgYyCUTAKRsEoIAsAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqdAxkFo2AUjIJRQBYAAAAA//8a7YGMglEwCkbBKCALAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//9iYWEZvRZ9FIyCUTAKRgHpAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xp0m0AmLPZG4RfEbh0gl4yCUTAKRsEowAcAAAAA//8a7YGMglEwCkbBKCALAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//9izI/ZMqD3gaDPeRACo3Mio2AUjIJRMDgAAAAA//8a7YGMglEwCkbBKCALAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//9iLE3aNajuRO+a64rCL0vePUAuGQWjYPCB0fwxCgYTAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//GnRzIKNgFIwCBECf8yAERudERgE9AQAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gp0DGQWjYAiB0X0go2AwAQAAAAD//xrtgYyCUTAKRsEoIAsAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqdAxkFo2AUjIJRQBYAAAAA//8a7YGMglEwCkbBKCALAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//9i4eBgH2g3jIJRMApGwSgYggAAAAD//xrtgYyCUTAKRsEoIAsAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//YhloB4wC2oKmqXYo/LrsQyTJj4JRMApGAS4AAAAA//8a7YGMglEwCkbBKCALAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//9ibCs6Nnon+ggClb2WKPz24uMD5JJRMApGwVAHAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gt0HMswBoTmP0TmRUTAKRgG5AAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gt0HMgpGwSgYBUSC0TlDVAAAAAD//xrtgYyCUTAKRsEoIAsAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xrdBzIKRsEoGAU4APqcByH5kTYnAgAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//YuyvODm6D2QUjIJRMAqIAAXtZij8CZWnBsglgwMAAAAA//8a7YGMglEwCkbBKCALAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8a3QcyCkbBKBgFRIKRPueBDgAAAAD//xrtgYyCUTAKRsEoIAsAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//YuFgYRxoN4yCUTAKRsEoGIIAAAAA//8a7YGMglEwCkbBKCALAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//9iYWP6P9BuGAWjYBSMglEwBAEAAAD//xrtgYyCUTAKRsEoIAsAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//2IZaAcQAkmNZij8efWnSJIfBaNgFIyCUUAeIFS+AgAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Ypxbd3JIbQQZnfMYBaNg8ILROcuhDdDjhxAAAAAA//8a7YGMglEwCkbBKCALAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8a9HMgo2Oqo2AUDF0wmj+HNiAUfwAAAAD//xrtgYyCUTAKRsEoIAsAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//2JcUndsUM+BjIJRMAqGDohutEThL60/TpL8KBhaAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gp0DGQVUBaNj3KNgFIwcAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//GvR3oo+CwQ3Q5zwIyY/OiYyCUTB8AAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gp0DGQUUgdGzjkbBKBi5AAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Ylxbe3D0LKxRMApGwSgYBSQDAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//YuH++3Og3TAKRsEoGAWjYAgCAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//YuH+/X2g3TAKRsEoGAWjYAgCAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//YuH69XWg3TAKRsEoGAWjYAgCAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//YuH4/WWg3TAKRsEoGAWjYAgCAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//YmH783mg3TAKRsEoGAWjYAgCAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//YmH593Wg3TAKRsEoGAWjYAgCAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//YmFi+DbQbhgFo2AUjIJRMAQBAAAA//8a7YGMglEwCkbBKCALAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//9iYfj3faDdMApGwSgYBaNgCAIAAAAA//8a7YGMglEwCkbBKCALAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//9i+fdn9D6QUTAKRsEoGAWkAwAAAAD//xrtgYyCUTAKRsEoIAsAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//2L58/vnQLthFIyCUTAKRsEQBAAAAAD//xrtgYyCUTAKRsEoIAsAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//2L59efXQLthFIyCUTAKRsEQBAAAAAD//xrtgYyCUTAKRsEoIAsAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//2L59Xv0PpBRMApGwSgYBaQDAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Yvnz589Au2EUjIJRMApGwRAEAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Yvn3799Au2EUjIJRMApGwRAEAAAAAP//Gu2BjIJRMApGwSggCwAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//Gq1ARsEoGAWjYBSQBQAAAAD//xqtQEbBKBgFo2AUkAUAAAAA//8arUBGwSgYBaNgFJAFAAAAAP//AwCBoNDVpjasBAAAAABJRU5ErkJggg==');
+            },
+            create: function() {
+                game.time.advancedTiming = true;
+
+                game.w = window.innerWidth;
+                game.h = window.innerHeight;
+
+                game.bgImage = game.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'bg');
+                var scale = Math.min(
+                    window.innerWidth / game.cache.getImage('bg').width,
+                    window.innerHeight / game.cache.getImage('bg').height
+                )
+                game.bgImage.tileScale.x = scale;
+                game.bgImage.tileScale.y = scale;
+                game.bgImage.renderable = false;
+
+                game.stage.backgroundColor = '#2A2A2A';
+
+                game.lightSystem = new LightSystem(256, 256, false);
+
+                game.sprite1 = new Phaser.Sprite(0, 0);
+                console.log(game.sprite1.body);
+
+                game.light1 = new LightSource(new Phaser.Point(0, 0), 500, 1, [1, 0, 0, 1]);
+                game.lightSystem.addLightSource(game.light1);
+
+                game.light2 = new LightSource(new Phaser.Point(0, 0), 500, 1, [0, 1, 0, 1]);
+                game.lightSystem.addLightSource(game.light2);
+
+                game.light3 = new LightSource(new Phaser.Point(0, 0), 500, 1, [0, 0, 1, 1]);
+                game.lightSystem.addLightSource(game.light3);
+
+                game.light4 = new LightSource(new Phaser.Point(0, 0), 500, 1, [1, 1, 0, 1]);
+                game.lightSystem.addLightSource(game.light4);
+
+                game.object1 = new LightedObject([
+                    new Phaser.Point(game.w * 0.5, game.h * 0.575),
+                    new Phaser.Point(game.w * 0.6625, game.h * 0.6375),
+                    new Phaser.Point(game.w * 0.5, game.h * 0.8)
+                ]);
+                game.lightSystem.addObject(game.object1);
+
+                game.object2 = new LightedObject([
+                    new Phaser.Point(game.w * 0.75, game.h * 0.3875),
+                    new Phaser.Point(game.w * 0.8875, game.h * 0.35),
+                    new Phaser.Point(game.w * 0.775, game.h * 0.5)
+                ]);
+                game.lightSystem.addObject(game.object2);
+
+                game.object3 = new LightedObject([
+                    new Phaser.Point(game.w * 0.25, game.h * 0.325),
+                    new Phaser.Point(game.w * 0.3125, game.h * 0.45),
+                    new Phaser.Point(game.w * 0.25, game.h * 0.325)
+                ]);
+                game.lightSystem.addObject(game.object3);
+
+                game.lightSystem.updateUniforms();
+
+                this.debugText = game.add.text(10, 10, '...', {
+                    font: '300 32px Roboto',
+                    fill: '#FFFFFF',
+                    boundsAlignH: 'left',
+                    boundsAlignV: 'top'
+                });
+                this.debugText.setTextBounds(0, 0, window.innerWidth, window.innerHeight);
+            },
+            update: function() {
+                var time = new Date().getTime() / 500;
+
+                game.light1.position.x = (Math.sin(time) + 1) / 2 * game.w;
+                game.light1.position.y = (Math.cos(time) + 1) / 2 * game.h;
+                game.lightSystem.updateLightSourcesUniforms();
+                game.lightSystem.update();
+
+                game.light2.position.x = (Math.sin(time * 1.5 + Math.PI / 2) + 1) / 2 * game.w;
+                game.light2.position.y = (Math.cos(time * 1.5 + Math.PI / 2) + 1) / 2 * game.h;
+                game.lightSystem.updateLightSourcesUniforms();
+                game.lightSystem.update();
+
+                game.light3.position.x = (Math.sin(time * 2 + Math.PI) + 1) / 2 * game.w;
+                game.light3.position.y = (Math.cos(time * 2 + Math.PI) + 1) / 2 * game.h;
+                game.lightSystem.updateLightSourcesUniforms();
+                game.lightSystem.update();
+
+                game.light4.position.x = (Math.sin(time * 2.5 + Math.PI * 3 / 2) + 1) / 2 * game.w;
+                game.light4.position.y = (Math.cos(time * 2.5 + Math.PI * 3 / 2) + 1) / 2 * game.h;
+                game.lightSystem.updateLightSourcesUniforms();
+                game.lightSystem.update();
+
+                this.debugText.setText(game.time.fps + ' FPS');
+
+                game.lightSystem.updateCameraPos(
+                    new Phaser.Point(
+                        (Math.sin(time / 2) + 1) / 2 * game.w / 10,
+                        (Math.cos(time / 2) + 1) / 2 * game.w / 10
+                    )
+                );
+            }
+        });
+
+        document.querySelector('#enable-debug').addEventListener('change', function(e) {
+            game.lightSystem.setDebug(!!e.target.checked);
+        });
+
+        document.querySelector('#toggle-background').addEventListener('change', function(e) {
+            game.bgImage.renderable = !!e.target.checked;
+        });
+    </script>    
+</body>
+</html>
