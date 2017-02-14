@@ -16,12 +16,15 @@ Enlightenment consists of 3 main classes:
 
 ## `LightSystem` class
 
+### `LightSystem([WIDTH, [HEIGHT, [DEBUG]]])`
+
 This is the main class that you need to instantiate in order to spawn necessary shaders & render images.
 
-    var lightSystem = new LightSystem(WIDTH, HEIGHT, DEBUG);
-    // - WIDTH, HEIGHT: size of the off-screen image used to render the light map.
-    // The higher the resolution - the better the quality. I recommend using 256x256 as larger values have significant impact on the performance.
-    // - DEBUG: set to true to draw debug stuff.
+- WIDTH/HEIGHT (optional): size of the off-screen image used to render the light map. The higher the resolution - the better the quality. I recommend using 256x256 as larger values have significant impact on the performance.
+- DEBUG (optional): set to true to draw debug stuff.
+
+    // Create light system
+    var lightSystem = new LightSystem(256, 256, true);
 
     // Call this in your `update` method:
     lightSystem.update();
@@ -31,13 +34,18 @@ This is the main class that you need to instantiate in order to spawn necessary 
 
 ## `LightSource` class
 
-Represents a source of light. Has color, radius and strength.
+### `LightSource(POSITION, RADIUS, INTENSITY, COLOR, [ANGLE_START, ANGLE_END])`
 
-    var lightSource1 = new LightSource(new Phaser.Point(X, Y), RADIUS, INTENSITY, [RED, GREEN, BLUE, ALPHA]);
-    // - X, Y: position of light source.
-    // - RADIUS: radius of image.
-    // - INTENSITY: how intensive is the light. 0 < INTENSITY <= 1
-    // - RED, GREEN, BLUE, ALPHA - color of the light.
+Represents a source of light. Has color, radius, strength and optional direction.
+
+- POSITION: position of light source, must be instance of `Phaser.Point`
+- RADIUS: radius of image.
+- INTENSITY: how intensive is the light. 0 < INTENSITY <= 1
+- COLOR: color of the light.
+- ANGLE_START, ANGLE_END (optional): direction of the light cone. Defaults to `0, 0`. If not provided (i. e. bot values set to zero), the light will be emitted in all directions, otherwise the light will become directional and will be capped to provided angles.
+
+    // Create light source
+    var lightSource1 = new LightSource(new Phaser.Point(200, 300), 500, 0.5, [1, 0, 0, 1]);
 
     // Add light to scene
     lightSystem.addLightSource(lightSource1);
@@ -54,10 +62,14 @@ Represents a source of light. Has color, radius and strength.
 
 ## `LightedObject` class
 
+### `LightedObject(POINTS)`
+
 Represents an object that is "lighted", i. e. blocks light rays that are cast by light sources.
 
+- ARRAY_OF_POINTS: array of `Phaser.Point` intances.
+
+    // Create lighted object
     var lightedObject1 = new LightedObject([ARRAY_OF_POINTS]);
-    // - ARRAY_OF_POINTS: array of `Phaser.Point` intances.
 
     // Add lighted object to scene
     lightSystem.addLightedObject(lightedObject1);
@@ -81,10 +93,20 @@ You would probably want the light system to know where your camera is. Here's ho
     lightSystem.updateUniforms();
     lightSystem.update();
 
+## Rotating the light source
+
+Directional lights can be rotated using `setRotation(ANGLE_IN_RADIANS)` method:
+
+    lightSource1.setRotation(Math.PI / 2); // Rotates light by 90 degrees
+    lightSource1.setRotation(Math.PI / 2); // Does not do anything, the light is already at the same rotation
+    lightSource1.setRotation(Math.PI / 4); // Rotates light by -45 degrees so that now it is at 45 degrees
+    lightSource1.setRotation(Math.PI); // Rotates light by 135 degrees so that not it is at 180 degrees
+
 # Roadmap
 
 - Rotating the camera
 - Moving & rotating `LightedObject`s
+- Blurred edges (WIP)
 
 # About & cntributing
 

@@ -190,11 +190,14 @@ export class LightSystem {
 }
 
 export class LightSource {
-    constructor(position, radius, intensity, color) {
+    constructor(position, radius, intensity, color, angleStart, angleEnd) {
         this.position = position;
         this.radius = radius;
         this.intensity = intensity;
         this.color = color;
+        this._angleStart = angleStart || 0;
+        this._angleEnd = angleEnd || 0;
+        this.setRotation(0);
     }
 
     getArray(scaleFactor) {
@@ -206,8 +209,29 @@ export class LightSource {
             this.color[0],
             this.color[1],
             this.color[2],
-            this.color[3]
+            this.color[3],
+            this.angleStart,
+            this.angleEnd,
+            0,
+            0
         ];
+    }
+
+    setRotation(rotation) {
+        if (this._angleStart == 0 && this._andleEnd == 0) {
+            return;
+        }
+
+        this.rotation = rotation;
+        this.angleStart = (this._angleStart + this.rotation) % (Math.PI * 2);
+        this.angleEnd = (this._angleEnd + this.rotation) % (Math.PI * 2);
+
+        if (this.angleStart < 0) {
+            this.angleStart += Math.PI * 2;
+        }
+        if (this.angleEnd < 0) {
+            this.angleEnd += Math.PI * 2;
+        }
     }
 }
 

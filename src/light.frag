@@ -1,5 +1,7 @@
 precision mediump float;
 
+#define M_PI 3.1415926535897932384626433832795
+
 varying vec2 vTextureCoord;
 uniform vec2 sizePx;
 
@@ -33,6 +35,18 @@ vec2 applyCameraTransformation(in vec2 point) {
     return point - cameraPos;
 }
 
+float angleBetween(in float start, in float end)
+{
+    return mod(end - start, M_PI * 2.0);
+}
+
+bool isBetween(in float startAngle, in float endAngle, in float testAngle) {
+    float a1 = abs(angleBetween(startAngle, testAngle));
+    float a2 = abs(angleBetween(testAngle, endAngle));
+    float a3 = abs(angleBetween(startAngle, endAngle));
+    return (a1 + a2) - a3 < 1.0;
+}
+
 void main() {
     // pixel size in units
 
@@ -49,9 +63,9 @@ void main() {
 
     // sources[0] = mouse;
 
-    for (int sourceIndex = 0; sourceIndex < 256; sourceIndex += 2) {
+    for (int sourceIndex = 0; sourceIndex < 256; sourceIndex += 3) {
         // Loop through light sources
-        if (sourceIndex >= sourcesCount * 2) {
+        if (sourceIndex >= sourcesCount * 3) {
             break;
         }
 
@@ -59,9 +73,12 @@ void main() {
             for (float dy = 0.0; dy < 1.0; dy += 1.0) {
                 vec4 source = vec4(sources[sourceIndex].xy + vec2(dx, dy) * 8.0, sources[sourceIndex].zw);
                 vec4 sourceColor = sources[sourceIndex + 1];
+                vec2 sourceAngle = sources[sourceIndex + 2].xy;
 
                 // Distance from current light source to current point
-                float distanceFromSource = distance(applyCameraTransformation(source.xy), pixelCoord);
+                float distanceFromSource = distance(applyCameraTransformation(source.xy), applyCameraTransformation(pixelCoord));
+                vec2 offset = pixelCoord - source.xy;
+                float angleFromSource = atan(offset.y, offset.x);
 
                 if (debug) {
                     // Draw light position & radius
@@ -70,9 +87,24 @@ void main() {
                         return;
                     }
                     if (abs(distanceFromSource - source.z) < 5.0) {
-                        gl_FragColor = vec4(sourceColor.x, sourceColor.y, sourceColor.z, 0.1);
-                        return;
+                        if ((sourceAngle.x == sourceAngle.y) || isBetween(sourceAngle.x, sourceAngle.y, angleFromSource)) {
+                            gl_FragColor = vec4(sourceColor.x, sourceColor.y, sourceColor.z, 0.1);
+                            return;
+                        }
                     }
+                    // if (sourceAngle.x != sourceAngle.y) {
+                    //     if (angleFromSource - (offset.x + offset.y) / 2.0 < 2.0) {
+                    //         gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
+                    //     }
+                    // }
+                }
+
+                if (distanceFromSource > source.z) {
+                    continue;
+                }
+
+                if ((sourceAngle.x != sourceAngle.y) && !isBetween(sourceAngle.x, sourceAngle.y, angleFromSource)) {
+                    continue;
                 }
 
                 // Check if segment between this point and current light source

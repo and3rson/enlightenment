@@ -57,13 +57,13 @@
                 game.sprite1 = new Phaser.Sprite(0, 0);
                 console.log(game.sprite1.body);
 
-                game.light1 = new LightSource(new Phaser.Point(0, 0), 500, 1, [1, 0, 0, 1]);
+                game.light1 = new LightSource(new Phaser.Point(0, 0), 500, 1, [1, 0, 0, 1], Math.PI / 4, Math.PI / 4 * 3);
                 game.lightSystem.addLightSource(game.light1);
 
                 game.light2 = new LightSource(new Phaser.Point(0, 0), 500, 1, [0, 1, 0, 1]);
                 game.lightSystem.addLightSource(game.light2);
 
-                game.light3 = new LightSource(new Phaser.Point(0, 0), 500, 1, [0, 0, 1, 1]);
+                game.light3 = new LightSource(new Phaser.Point(0, 0), 500, 1, [0, 0, 1, 1], Math.PI / 4 * 5, Math.PI / 4 * 7);
                 game.lightSystem.addLightSource(game.light3);
 
                 game.light4 = new LightSource(new Phaser.Point(0, 0), 500, 1, [1, 1, 0, 1]);
@@ -105,21 +105,24 @@
 
                 game.light1.position.x = (Math.sin(time) + 1) / 2 * game.w;
                 game.light1.position.y = (Math.cos(time) + 1) / 2 * game.h;
-                game.lightSystem.updateLightSourcesUniforms();
-                game.lightSystem.update();
+                game.light1.setRotation(time);
+                // game.lightSystem.updateLightSourcesUniforms();
+                // game.lightSystem.update();
 
                 game.light2.position.x = (Math.sin(time * 1.5 + Math.PI / 2) + 1) / 2 * game.w;
                 game.light2.position.y = (Math.cos(time * 1.5 + Math.PI / 2) + 1) / 2 * game.h;
-                game.lightSystem.updateLightSourcesUniforms();
-                game.lightSystem.update();
+                // game.lightSystem.updateLightSourcesUniforms();
+                // game.lightSystem.update();
 
                 game.light3.position.x = (Math.sin(time * 2 + Math.PI) + 1) / 2 * game.w;
                 game.light3.position.y = (Math.cos(time * 2 + Math.PI) + 1) / 2 * game.h;
-                game.lightSystem.updateLightSourcesUniforms();
-                game.lightSystem.update();
+                game.light3.setRotation(time * 2);
+                // game.lightSystem.updateLightSourcesUniforms();
+                // game.lightSystem.update();
 
                 game.light4.position.x = (Math.sin(time * 2.5 + Math.PI * 3 / 2) + 1) / 2 * game.w;
                 game.light4.position.y = (Math.cos(time * 2.5 + Math.PI * 3 / 2) + 1) / 2 * game.h;
+
                 game.lightSystem.updateLightSourcesUniforms();
                 game.lightSystem.update();
 
