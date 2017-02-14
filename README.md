@@ -4,7 +4,7 @@ A simple yet fast light engine for Phaser (WebGL render).
 
 # Example
 
-![Screenshot](http://i.imgur.com/74vkxas.jpg)
+![Screenshot](http://i.imgur.com/d9XeWld.jpg)
 
 # Demo
 
