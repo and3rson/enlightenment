@@ -5,11 +5,11 @@ precision mediump float;
 varying vec2 vTextureCoord;
 uniform vec2 sizePx;
 
-uniform vec4 sources[16];
+uniform vec4 sources[1024];
 uniform int sourcesCount;
 uniform vec2 mouse;
 
-uniform vec4 faces[16];
+uniform vec4 faces[1024];
 uniform int facesCount;
 
 uniform vec2 cameraPos;
@@ -63,7 +63,7 @@ void main() {
 
     // sources[0] = mouse;
 
-    for (int sourceIndex = 0; sourceIndex < 256; sourceIndex += 3) {
+    for (int sourceIndex = 0; sourceIndex < 1024; sourceIndex += 3) {
         // Loop through light sources
         if (sourceIndex >= sourcesCount * 3) {
             break;
@@ -76,8 +76,8 @@ void main() {
                 vec2 sourceAngle = sources[sourceIndex + 2].xy;
 
                 // Distance from current light source to current point
-                float distanceFromSource = distance(applyCameraTransformation(source.xy), applyCameraTransformation(pixelCoord));
-                vec2 offset = pixelCoord - source.xy;
+                float distanceFromSource = distance(applyCameraTransformation(source.xy), pixelCoord);
+                vec2 offset = pixelCoord - applyCameraTransformation(source.xy);
                 float angleFromSource = atan(offset.y, offset.x);
 
                 if (debug) {
@@ -110,9 +110,18 @@ void main() {
                 // Check if segment between this point and current light source
                 // is blocked by any face
                 bool isSourceBlocked = false;
-                for (int faceIndex = 0; faceIndex < 256; faceIndex++) {
+                for (int faceIndex = 0; faceIndex < 1024; faceIndex++) {
                     if (faceIndex >= facesCount) {
                         break;
+                    }
+                    if (debug) {
+                        vec2 a = applyCameraTransformation(faces[faceIndex].xy);
+                        vec2 b = applyCameraTransformation(faces[faceIndex].zw);
+
+                        if (abs((distance(a, pixelCoord) + distance(b, pixelCoord)) - distance(a, b)) <= 1.0) {
+                            gl_FragColor = vec4(0.0, 1.0, 1.0, 1.0);
+                            return;
+                        }
                     }
                     if (intersects(applyCameraTransformation(source.xy), pixelCoord, applyCameraTransformation(faces[faceIndex].xy), applyCameraTransformation(faces[faceIndex].zw))) {
                         // This light is blocked by one of the faces.
