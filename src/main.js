@@ -100,7 +100,9 @@ export class LightSystem {
         );
         this.lightFilter.setResolution(this.w, this.h);
         this.blurFilter = new Phaser.Filter(game, this.blurFilterUniforms, blurFragSource);
-        this.lightImage.filters = [this.lightFilter, this.blurFilter];
+        this.lightImage.filters = [this.lightFilter];
+
+        this.renderedImage.filters = [this.blurFilter];
 
         this.lightSources = [];
         this.objects = [];
@@ -337,8 +339,6 @@ export class LightedObject {
     }
 }
 
-if (window) {
-    window.LightSystem = LightSystem;
-    window.LightSource = LightSource;
-    window.LightedObject = LightedObject;
-}
+window.LightSystem = LightSystem;
+window.LightSource = LightSource;
+window.LightedObject = LightedObject;

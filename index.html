@@ -101,7 +101,7 @@
                 this.debugText.setTextBounds(0, 0, window.innerWidth, window.innerHeight);
             },
             update: function() {
-                var time = new Date().getTime() / 500;
+                var time = new Date().getTime() / 5000;
 
                 game.light1.position.x = (Math.sin(time) + 1) / 2 * game.w;
                 game.light1.position.y = (Math.cos(time) + 1) / 2 * game.h;
